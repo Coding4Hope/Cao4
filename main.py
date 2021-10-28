@@ -1,5 +1,4 @@
 from typing import Optional
-
 from fastapi import FastAPI
 
 app = FastAPI()
@@ -13,11 +12,3 @@ def read_root():
 @app.get("/items/{item_id}")
 def read_item(item_id: int, q: Optional[str] = None):
     return {"item_id": item_id, "q": q}
-
-
-
-'''
-1º git add .
-2º git commit -m "Add tela de users"
-3º git push
-'''
