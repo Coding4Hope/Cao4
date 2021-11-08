@@ -18,9 +18,13 @@ class EspecieIn(BaseModel):
     nome: str
 
 
+class EspecieCreate(EspecieIn):
+    especie_id: str
+
+
 def insert(especie: Especie, db: Session):
     db_especie = schemas.Especie(
-        refuse_id=especie["especie_id"],
+        especie_id=especie["especie_id"],
         nome=especie["nome"]
     )
 
