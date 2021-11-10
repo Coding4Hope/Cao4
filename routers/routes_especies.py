@@ -1,4 +1,4 @@
-from models.especie import Especie, EspecieIn, get_by, get_by_id, update, insert, EspecieCreate
+from models.especie import Especie, EspecieIn, get_by, get_by_id, update, insert, delete, EspecieCreate
 from fastapi import APIRouter, Depends
 from sqlalchemy.orm import Session
 from db.pg import get_db
