@@ -3,12 +3,22 @@
   <component name="issues">
     <option name="index">
       <map>
+        <entry key="$PROJECT_DIR$/db/schemas.py">
+          <value>
+            <set />
+          </value>
+        </entry>
         <entry key="$PROJECT_DIR$/models/especie.py">
           <value>
             <set />
           </value>
         </entry>
         <entry key="$PROJECT_DIR$/routers/routes_especies.py">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/tests/test_main.py">
           <value>
             <set />
           </value>

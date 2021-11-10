@@ -1,9 +1,10 @@
 from fastapi.testclient import TestClient
-import requests
 from starlette import responses
-
-from main import app
 from models import especie
+from main import app
+
+import requests
+
 
 client = TestClient(app)
 
@@ -15,6 +16,13 @@ def test_get_especies():
 
 
 def test_delete_especies():
-    response = client.delete("/delete/{especie_id}")
+    payload = {
+        "nome": "novo teste"
+    }
+
+    response = client.put('/especie', json=payload)
+    especie_salvo = ((response.json())["data"])
+
+    response = client.delete("/delete/{0}".format(especie_salvo["especie_id"]))
     assert response.status_code == 200
     assert ((response.json())["success"]) is True
