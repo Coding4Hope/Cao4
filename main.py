@@ -10,6 +10,8 @@ app = FastAPI(title="Cão 4 Hope")
 
 DATABASE_URL = config("DATABASE_URL", default="postgresql://postgres:postgres@localhost:5432/cao4")
 
+DATABASE_URL = DATABASE_URL.replace('postgres://', 'postgresql://')
+
 schemas.Base.metadata.create_all(bind=create_engine(
     DATABASE_URL, isolation_level="AUTOCOMMIT", pool_size=100, max_overflow=100, pool_recycle=600
 ))
