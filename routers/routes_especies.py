@@ -55,14 +55,14 @@ def get_by_id(id: str, db: Session = Depends(get_db)):
         return {'success': False, 'message': 'Deu Ruim'}
 
 
-@router.post("/update/")
+@router.post("/")
 def save_especie(especie: EspecieIn, db: Session = Depends(get_db)):
     """
     Endpoint para atualizar a especie
     """
 
     especie = especie.dict()
-    especie_db = get_by_id(especie_id=especie["especie_id"], db=db)
+    especie_db = get_especie_by_id(especie_id=especie["especie_id"], db=db)
 
     if especie_db:
         especie = update(especie=especie, db=db)
