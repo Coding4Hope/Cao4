@@ -1,5 +1,5 @@
 import uuid
-from models.especie import Especie, EspecieIn, get_by, get_by_id, update, insert, delete
+from models.especie import Especie, EspecieIn, get_by, update, insert, delete, get_by_id as get_especie_by_id
 from fastapi import APIRouter, Depends
 from sqlalchemy.orm import Session
 from db.pg import get_db
@@ -39,15 +39,30 @@ def get_by_nome(nome: str, db: Session = Depends(get_db)):
     except Exception as err:
         return {'success': False, 'message': 'Deu Ruim'}
 
+        
+@router.get("/by-id/{id}")
+def get_by_id(id: str, db: Session = Depends(get_db)):
+    """
+    Endpoint que retorna especies filtradas pelo id
+    """
 
-@router.post("/update/")
+    try:
+        especies = get_especie_by_id(especie_id=id, db=db)
+        return {'success': True, 'message': '', 'data': especies}
+
+    except Exception as err:
+        print(err)
+        return {'success': False, 'message': 'Deu Ruim'}
+
+
+@router.post("/")
 def save_especie(especie: EspecieIn, db: Session = Depends(get_db)):
     """
     Endpoint para atualizar a especie
     """
 
     especie = especie.dict()
-    especie_db = get_by_id(especie_id=especie["especie_id"], db=db)
+    especie_db = get_especie_by_id(especie_id=especie["especie_id"], db=db)
 
     if especie_db:
         especie = update(especie=especie, db=db)
