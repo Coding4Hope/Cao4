@@ -1,6 +1,7 @@
 from sqlalchemy.orm import Session
 from pydantic import BaseModel
 from uuid import uuid4
+from .cidade import Cidade
 
 import db.schemas as schemas
 
@@ -11,6 +12,7 @@ class Usuario(BaseModel):
     telefone: str
     cpf: str
     endereco: str
+    cidade: Cidade
     status: str
     facebook: str
     instagram: str
@@ -28,6 +30,7 @@ class UsuarioIn(BaseModel):
     telefone: str
     cpf: str
     endereco: str
+    cidade: Cidade
     status: str
     facebook: str
     instagram: str
@@ -42,6 +45,7 @@ def insert(usuario: Usuario, db: Session):
         telefone=usuario["telefone"],
         cpf=usuario["cpf"],
         endereco=usuario["endereco"],
+        cidade_id=usuario["cidade_id"],
         status=usuario["status"],
         facebook=usuario["facebook"],
         instagram=usuario["instagram"],
@@ -63,6 +67,7 @@ def update(usuario: Usuario, db: Session):
     db_usuario.telefone = usuario["telefone"]
     db_usuario.cpf = usuario["cpf"]
     db_usuario.endereco = usuario["endereco"]
+    db_usuario.cidade_id = usuario["cidade_id"]
     db_usuario.status = usuario["status"]
     db_usuario.facebook = usuario["facebook"]
     db_usuario.instagram = usuario["instagram"]

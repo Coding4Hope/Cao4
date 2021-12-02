@@ -17,7 +17,7 @@ class Usuario(Base):
     nome = Column(String)
     telefone = Column(String)
     cpf = Column(String)
-    #cidade_id = Column(String, ForeignKey("cidade.cidade_id"))
+    cidade_id = Column(String, ForeignKey("cidade.cidade_id"))
     endereco = Column(String)
     status = Column(String)
     facebook = Column(String)
