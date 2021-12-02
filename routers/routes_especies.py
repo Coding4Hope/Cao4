@@ -99,7 +99,8 @@ def delete_permission(especie_id: str, db: Session = Depends(get_db)):
     """
     Endpoint que realiza a exclusão da especie
     """
-
-    delete(especie_id=especie_id, db=db)
-
-    return {'success': True, 'message': 'Deu ruim', 'data': []}
+    try:
+        delete(especie_id=especie_id, db=db)
+        return {'success': True, 'message': 'Registro excluido com sucesso', 'data': []}
+    except:
+        return {'success': False, 'message': 'Deu ruim', 'data': []}

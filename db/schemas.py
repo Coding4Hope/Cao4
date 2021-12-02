@@ -8,3 +8,19 @@ class Especie(Base):
 
     especie_id = Column(String, primary_key=True, index=True)
     nome = Column(String)
+
+class Usuario(Base):
+    __tablename__ = "usuarios"
+
+    usuario_id = Column(String, primary_key=True, index=True)
+    nome = Column(String)
+    telefone = Column(String)
+    cpf = Column(String)
+    #cidade_id = Column(String, ForeignKey("cidade.cidade_id"))
+    endereco = Column(String)
+    status = Column(String)
+    facebook = Column(String)
+    instagram = Column(String)
+    email = Column(String)
+    tipo = Column(String)
+    password = Column(String)

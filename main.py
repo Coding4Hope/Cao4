@@ -1,4 +1,4 @@
-from routers import routes_especies
+from routers import routes_especies, routes_usuarios
 from starlette.middleware.cors import CORSMiddleware
 from sqlalchemy import create_engine
 from decouple import config, Csv
@@ -8,7 +8,7 @@ import db.schemas as schemas
 
 app = FastAPI(title="Cão 4 Hope")
 
-DATABASE_URL = config("DATABASE_URL", default="postgresql://postgres:postgres@localhost:5432/cao4")
+DATABASE_URL = config("DATABASE_URL", default="postgresql://postgres:ra1055793@localhost:5432/cao4")
 
 DATABASE_URL = DATABASE_URL.replace('postgres://', 'postgresql://')
 
@@ -27,3 +27,4 @@ app.add_middleware(
 )
 
 app.include_router(routes_especies.router, prefix="/especie", tags=["espécies"])
+app.include_router(routes_usuarios.router, prefix="/usuario", tags=["usuários"])
