@@ -9,6 +9,7 @@ class Especie(Base):
     especie_id = Column(String, primary_key=True, index=True)
     nome = Column(String)
 
+
 class Usuario(Base):
     __tablename__ = "usuarios"
 
@@ -24,3 +25,20 @@ class Usuario(Base):
     email = Column(String)
     tipo = Column(String)
     password = Column(String)
+
+
+class Cidade(Base):
+    __tablename__ = "cidades"
+
+    cidade_id = Column(String, primary_key=True, index=True)
+    nome = Column(String)
+    estado_id = Column(String, ForeignKey("estados.estado_id"))
+
+
+class Estado(Base):
+    __tablename__ = "estados"
+
+    estado_id = Column(String, primary_key=True, index=True)
+    nome = Column(String)
+    cidades = relationship("Cidade")
+    
