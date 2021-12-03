@@ -39,7 +39,7 @@ def get_by_nome(nome: str, db: Session = Depends(get_db)):
     except Exception as err:
         return {'success': False, 'message': 'Deu Ruim'}
 
-        
+
 @router.get("/by-id/{id}")
 def get_by_id(id: str, db: Session = Depends(get_db)):
     """
@@ -55,12 +55,49 @@ def get_by_id(id: str, db: Session = Depends(get_db)):
         return {'success': False, 'message': 'Deu Ruim'}
 
 
+@router.post("/")
+def save_usuario(usuario: UsuarioIn, db: Session = Depends(get_db)):
+    """
+    Endpoint para atualizar o usuario
+    """
+
+    usuario = usuario.dict()
+    usuario_db = get_usuario_by_id(usuario_id=usuario["usuario_id"], db=db)
+
+    if usuario_db:
+        usuario = update(usuario=usuario, db=db)
+    else:
+        return {'success': False, 'message': 'C eh burru?'}
+    return {'success': True, 'message': '', 'data': [usuario]}
+
+
+@router.put("/")
+def create_usuario(data: UsuarioIn, db: Session = Depends(get_db)):
+    """
+    Endpoint para criar novos usuários
+    """
+    usuario = data.dict()
+
+    check_usuario = get_by(cpf=usuario["cpf"], db=db)
+
+    print(usuario)
+
+    if not check_usuario:
+        usuario["usuario_id"] = str(uuid4())
+        print(usuario)
+
+        usuario = insert(usuario=usuario, db=db)
+        return {'success': True, 'message': '', 'data': [usuario]}
+    else:
+        return {'success': False, 'message': 'Usuário já existe!', 'data': []}
+
+
 @router.delete("/delete/{usuario_id}")
 def delete_permission(usuario_id: str, db: Session = Depends(get_db)):
     """
     Endpoint que realiza a exclusão do usuario
     """
-   
+
     try:
         delete(usuario_id=usuario_id, db=db)
         return {'success': True, 'message': 'Registro excluido com sucesso', 'data': []}

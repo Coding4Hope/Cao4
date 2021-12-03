@@ -13,6 +13,7 @@ class Usuario(BaseModel):
     cpf: str
     endereco: str
     cidade: Cidade
+    cidade_id: str
     status: str
     facebook: str
     instagram: str
@@ -30,7 +31,7 @@ class UsuarioIn(BaseModel):
     telefone: str
     cpf: str
     endereco: str
-    cidade: Cidade
+    cidade_id: str
     status: str
     facebook: str
     instagram: str
@@ -82,19 +83,20 @@ def update(usuario: Usuario, db: Session):
     return db_usuario
 
 
-def get_by(db: Session, nome: str = None):
+def get_by(db: Session, nome: str = None, cpf: str = None):
     usuarios = db.query(schemas.Usuario)
 
     if nome:
         usuarios = usuarios.filter(schemas.Usuario.nome.contains(nome))
-
+    if cpf:
+        usuarios = usuarios.filter(schemas.Usuario.cpf==cpf)
     usuarios = usuarios.all()
     return usuarios
 
 
 def get_by_id(db: Session, usuario_id: str):
     usuario = db.query(schemas.Usuario).get(usuario_id)
-    
+
     if usuario:
         return usuario
     else:
