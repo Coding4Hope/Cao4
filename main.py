@@ -8,7 +8,7 @@ import db.schemas as schemas
 
 app = FastAPI(title="Cão 4 Hope")
 
-DATABASE_URL = config("DATABASE_URL", default="postgresql://postgres:ra1055793@localhost:5432/cao4")
+DATABASE_URL = config("DATABASE_URL", default="postgresql://postgres:postgres@localhost:5432/cao4")
 
 DATABASE_URL = DATABASE_URL.replace('postgres://', 'postgresql://')
 
