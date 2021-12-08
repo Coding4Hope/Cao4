@@ -23,8 +23,8 @@ def get_all(db: Session = Depends(get_db)):
         return {'success': False, 'message': 'Deu Ruim'}
 
 
-@router.get("/by-nomes/{nome}")
-def get_by_nome(nome: str, db: Session = Depends(get_db)):
+@router.get("/by/")
+def get_by_info(cpf: str=None, nome: str=None, db: Session = Depends(get_db)):
     """
     Endpoint que retorna usuarios filtradas pelo nome
     :param nome: Nome do usuario
@@ -33,7 +33,7 @@ def get_by_nome(nome: str, db: Session = Depends(get_db)):
     """
 
     try:
-        usuarios = get_by(nome=nome, db=db)
+        usuarios = get_by(cpf=cpf, nome=nome, db=db)
         return {'success': True, 'message': '', 'data': usuarios}
 
     except Exception as err:
