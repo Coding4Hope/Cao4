@@ -87,7 +87,7 @@ def get_by(db: Session, nome: str = None, cpf: str = None):
     usuarios = db.query(schemas.Usuario)
 
     if nome:
-        usuarios = usuarios.filter(schemas.Usuario.nome.contains(nome))
+        usuarios = usuarios.filter(schemas.Usuario.nome.ilike(nome))
     if cpf:
         usuarios = usuarios.filter(schemas.Usuario.cpf==cpf)
     usuarios = usuarios.all()
