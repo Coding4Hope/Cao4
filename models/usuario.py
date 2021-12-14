@@ -32,11 +32,11 @@ class UsuarioIn(BaseModel):
     cpf: str
     endereco: str
     cidade_id: str
-    status: str
+    status: str='ativo'
     facebook: str
     instagram: str
     email: str
-    tipo: str
+    tipo: str='comum'
     password: str
 
 def insert(usuario: Usuario, db: Session):
