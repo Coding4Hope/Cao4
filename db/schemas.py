@@ -41,3 +41,16 @@ class Usuario(Base):
     email = Column(String)
     tipo = Column(String)
     password = Column(String)
+
+
+class ONG(Base):
+    __tablename__ = "ong"
+
+    ong_id = Column(String, primary_key=True, index=True)
+    nome = Column(String)
+    email = Column(String)
+    site = Column(String)
+    endereco = Column(String)
+    pet = Column(String)
+    link_vakinha = Column(String)
+    cidade_nome = Column(String, ForeignKey("cidades.nome"))

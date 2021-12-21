@@ -40,3 +40,11 @@ def get_by_id(db: Session, cidade_id: str):
         return cidade
     else:
         return None
+
+def get_by_nome(db: Session, nome: str):
+    cidade = db.query(schemas.Cidade).get(nome)
+
+    if cidade:
+        return cidade
+    else:
+        return None
