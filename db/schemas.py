@@ -53,4 +53,4 @@ class ONG(Base):
     endereco = Column(String)
     pet = Column(String)
     link_vakinha = Column(String)
-    cidade_nome = Column(String, ForeignKey("cidades.nome"))
+    cidade_id = Column(String, ForeignKey("cidades.cidade_id"))
